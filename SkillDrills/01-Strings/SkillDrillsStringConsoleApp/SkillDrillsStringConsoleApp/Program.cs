@@ -24,3 +24,11 @@ var mostCommonWord = words
 Console.WriteLine($"Most common word: {mostCommonWord}");
 
 Console.WriteLine($"Title Case: {System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input)}");
+
+
+Console.WriteLine($"Vowel count: {CountVowels(input)}");
+
+static int CountVowels(string input)
+{
+    return input.Count(c => "aeiouAEIOU".Contains(c));
+}
