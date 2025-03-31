@@ -5,6 +5,11 @@ using static System.Net.Mime.MediaTypeNames;
 //Using Linq
 Console.Write("Enter a sentence: ");
 string sentence = Console.ReadLine();
+if (string.IsNullOrWhiteSpace(sentence))
+{
+    Console.WriteLine("Please enter a valid sentence.");
+    return;
+}
 int countWithSpaces = CountCharsUsingLinqCount(sentence, ' ');
 int countWithoutSpaces = CountCharsUsingLinqCount2(sentence);
 Console.WriteLine($"Using Linq find Number of Characters with Spaces:{countWithSpaces}");
@@ -25,7 +30,7 @@ int CountCharsUsingLinqCount2(string sentence)
     return sentence.Count();
 }
 
-int GetWordCount(string input) { return input.Split(' ').Length; }
+ int  GetWordCount(string input) { return input.Split(' ').Length; }
 
 
 string WordToUpperCase (string sentence)
