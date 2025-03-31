@@ -46,9 +46,7 @@ string GetMostCommonWord(string sentence)
         .First()
         .Key;
     return commonWord;
-}
-
-  
+}  
 
 //Using For Each Loop
 //Console.Write("Enter a sentence: ");
