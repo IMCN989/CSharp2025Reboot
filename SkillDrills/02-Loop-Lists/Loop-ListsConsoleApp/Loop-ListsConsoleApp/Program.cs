@@ -16,8 +16,23 @@ while (true)
     {
         case 1:
             Console.Write("Enter item to add: ");
-            string item = Console.ReadLine();
-            shoppingCartValues.Add(item);
+            string newItem = Console.ReadLine()?.Trim();
+            if (!string.IsNullOrWhiteSpace(newItem))
+            {
+                if (!shoppingCartValues.Contains(newItem, StringComparer.OrdinalIgnoreCase))
+                {
+                    shoppingCartValues.Add(newItem);
+                    Console.WriteLine($"'{newItem}' added.");
+                }
+                else
+                {
+                    Console.WriteLine("Item already exists.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Item cannot be empty.");
+            }
             break;
         case 2:
             Console.Write("Enter item to remove: ");
@@ -26,10 +41,9 @@ while (true)
             break;
         case 3:
             Console.WriteLine("Items in the cart:");
-            foreach (string cartItem in shoppingCartValues)
-            {
-                Console.WriteLine(cartItem);
-            }
+            var sortedList = shoppingCartValues.OrderBy(x => x).ToList();
+            foreach (var item in sortedList)
+                Console.WriteLine($"- {item}");
             break;
         case 4:
             shoppingCartValues.Clear();
