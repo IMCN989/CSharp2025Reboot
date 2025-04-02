@@ -1,4 +1,7 @@
-﻿List <string>shoppingCartValues = new List<string>();
+﻿using Loop_ListsConsoleApp;
+
+
+ShoppingListManager manager = new();
 
 Console.WriteLine("Shopping Cart Menu");
 Console.WriteLine("1. Add Item");
@@ -17,11 +20,12 @@ while (true)
         case 1:
             Console.Write("Enter item to add: ");
             string newItem = Console.ReadLine()?.Trim();
+            
             if (!string.IsNullOrWhiteSpace(newItem))
             {
-                if (!shoppingCartValues.Contains(newItem, StringComparer.OrdinalIgnoreCase))
+                if (manager.AddItem(newItem))
                 {
-                    shoppingCartValues.Add(newItem);
+                    
                     Console.WriteLine($"'{newItem}' added.");
                 }
                 else
@@ -37,16 +41,14 @@ while (true)
         case 2:
             Console.Write("Enter item to remove: ");
             string itemToRemove = Console.ReadLine();
-            shoppingCartValues.Remove(itemToRemove);
+            manager.RemoveItem(itemToRemove);
             break;
         case 3:
             Console.WriteLine("Items in the cart:");
-            var sortedList = shoppingCartValues.OrderBy(x => x).ToList();
-            foreach (var item in sortedList)
-                Console.WriteLine($"- {item}");
+            manager.GetItems().ForEach(x => Console.WriteLine($"- {x}"));
             break;
         case 4:
-            shoppingCartValues.Clear();
+            manager.ClearList();
             Console.WriteLine("Cart cleared.");
             break;
         case 5:
